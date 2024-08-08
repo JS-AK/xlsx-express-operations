@@ -61,7 +61,7 @@
 2. Build and start the container using Docker Compose:
 
     ```bash
-    docker-compose up -d
+    docker compose up -d
     ```
 
 3. The service will be available at `http://localhost:3000`. You can access the endpoints using your browser or tools like `curl`:
