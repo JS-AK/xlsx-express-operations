@@ -1,0 +1,35 @@
+{
+  "name": "xlsx-express-operations",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "start:excel-watch": "node --watch .",
+    "start:excel-inspect": "node --inspect ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "exceljs": "4.4.0",
+    "express": "4.19.2",
+    "multer": "1.4.5-lts.1",
+    "pino": "9.3.2",
+    "pino-pretty": "11.2.2",
+    "xlsx": "0.18.5"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.21",
+    "@types/multer": "1.4.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JS-AK/xlsx-express-operations.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JS-AK/xlsx-express-operations/issues"
+  },
+  "homepage": "https://github.com/JS-AK/xlsx-express-operations#readme"
+}
