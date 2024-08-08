@@ -1,4 +1,5 @@
-**xlsx-express-operations** is a Node.js library designed to generate and stream Excel files through various methods using Express. It demonstrates different techniques for creating and serving Excel files using `ExcelJS` and `XLSX` libraries.
+# xlsx-express-operations 
+- is a Node.js app designed to generate and stream Excel files through various methods using Express. It demonstrates different techniques for creating and serving Excel files using `ExcelJS` and `XLSX` libraries.
 
 ## Features
 
