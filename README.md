@@ -27,7 +27,7 @@
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/xlsx-express-operations.git
+    git clone https://github.com/js-ak/xlsx-express-operations.git
     cd xlsx-express-operations
     ```
 
