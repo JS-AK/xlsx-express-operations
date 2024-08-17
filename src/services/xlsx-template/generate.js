@@ -3,8 +3,22 @@ import path from "node:path";
 
 import XlsxTemplate from "xlsx-template";
 
-export async function generate(templateName = "template01.xlsx") {
+const excels = new Map();
+
+async function getActualWorkbook(templateName) {
+  const exists = excels.get(templateName);
+
+  if (exists) return exists;
+
   const buffer = await fs.readFile(path.join(process.cwd(), "assets", templateName), "binary");
+
+  excels.set(templateName, buffer);
+
+  return buffer;
+}
+
+export async function generate(templateName = "template01.xlsx") {
+  const buffer = await getActualWorkbook(templateName);
 
   const template = new XlsxTemplate(buffer);
   const sheetNumber = 1;
