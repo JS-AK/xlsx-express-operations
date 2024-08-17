@@ -1,13 +1,14 @@
 import { fileURLToPath } from "node:url";
 
 import { ExcelJS } from "../services/index.js";
+
 import { withLogging } from "../helpers/index.js";
 
 async function _exec(req, res) {
   res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
   res.setHeader("Content-Disposition", "attachment; filename=data.xlsx");
 
-  await ExcelJS.xlsxWorkbookWriter(res, 1024);
+  await ExcelJS.generate(res, req.query.templateName);
 
   res.end();
 }

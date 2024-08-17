@@ -1,36 +1,26 @@
-import fs from 'node:fs';
+import { fileURLToPath } from "node:url";
+import fs from "node:fs";
 
-import ExcelJS from 'exceljs'
+import { ExcelJS } from "../services/index.js";
 
-export async function exec(req, res) {
+import { withLogging } from "../helpers/index.js";
+
+export async function _exec(req, res) {
   const filePath = req.file.path;
 
-  this.logger.info(filePath);
-
-  const stream = fs.createReadStream(filePath);
-
   try {
-    const workbookReader = new ExcelJS.stream.xlsx.WorkbookReader(stream);
-    const rows = [];
+    const data = await ExcelJS.xlsxWorkbookReader(filePath);
 
-    for await (const worksheetReader of workbookReader) {
-      for await (const row of worksheetReader) {
-        rows.push(row.values);
-      }
-    }
-
-    res.json({ data: rows[0] });
+    res.json({ data: data[0] });
   } catch (error) {
-    this.logger.error('Error reading Excel file: ' + error.message);
-
-    res.status(500).send('Error reading Excel file');
+    res.status(500).send("Error reading Excel file");
   } finally {
-    stream.close();
-
     fs.unlink(filePath, (err) => {
       if (err) {
-        this.logger.error('Error deleting file: ' + err.message);
+        this.logger.error("Error deleting file: " + err.message);
       }
     });
   }
 }
+
+export const exec = withLogging(_exec, fileURLToPath(import.meta.url));

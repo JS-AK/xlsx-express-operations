@@ -5,9 +5,10 @@
   "main": "./src/index.js",
   "type": "module",
   "scripts": {
+    "lint": "eslint .",
     "start": "node .",
-    "start:excel-watch": "node --watch .",
-    "start:excel-inspect": "node --inspect ."
+    "start:watch": "node --watch .",
+    "start:inspect": "node --inspect ."
   },
   "keywords": [],
   "author": "",
@@ -18,11 +19,15 @@
     "multer": "1.4.5-lts.1",
     "pino": "9.3.2",
     "pino-pretty": "11.2.2",
-    "xlsx": "0.18.5"
+    "xlsx": "0.18.5",
+    "xlsx-template": "1.4.4"
   },
   "devDependencies": {
+    "@eslint/js": "9.9.0",
     "@types/express": "4.17.21",
-    "@types/multer": "1.4.11"
+    "@types/multer": "1.4.11",
+    "eslint": "9.9.0",
+    "globals": "15.9.0"
   },
   "repository": {
     "type": "git",

@@ -6,9 +6,29 @@ export function* generateData(count = 1_000_000) {
 
 export const clearStat = (stat) => {
   setTimeout(() => {
-    stat.rss = 0
-    stat.heapTotal = 0
-    stat.heapUsed = 0
-    stat.external = 0
+    stat.rss = 0;
+    stat.heapTotal = 0;
+    stat.heapUsed = 0;
+    stat.external = 0;
   }, 5000);
-}
+};
+
+export const withLogging = (fn, name) => {
+  return async function (...args) {
+    const token = crypto.randomUUID();
+
+    const start = performance.now();
+
+    this.logger.info(`${token}: ${name} start`);
+    try {
+      await fn.apply(this, args);
+    } catch (error) {
+      this.logger.error(`${token}: ${error.message || "UNKNOWN_ERROR"}`);
+
+      throw error;
+    } finally {
+      this.logger.info(`${token}: ${name} end with duration: ${performance.now() - start}ms`);
+      this.clearStat(this.stat);
+    }
+  };
+};
