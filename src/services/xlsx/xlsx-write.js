@@ -1,6 +1,6 @@
 import XLSX from "xlsx";
 
-import { generateData } from "../helpers/index.js";
+import { generateData } from "../../helpers/index.js";
 
 export async function xlsxWrite() {
   const header = ["Name", "Age", "Email"];
