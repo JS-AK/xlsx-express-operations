@@ -1,4 +1,4 @@
-# xlsx-express-operations 
+# xlsx-express-operations
 - is a Node.js app designed to generate and stream Excel files through various methods using Express. It demonstrates different techniques for creating and serving Excel files using `ExcelJS` and `XLSX` libraries.
 
 ## Features
@@ -9,11 +9,14 @@
 
 ## Endpoints
 
-- **/download-exceljs-1**: `Buffer` Generates an Excel file using `ExcelJS` with a `workbook.xlsx.write`.
-- **/download-exceljs-2**: `Stream` Generates an Excel file using `ExcelJS` with a `WorkbookWriter` and streams it through a `PassThrough` stream (`highWaterMark: 1024`).
-- **/download-exceljs-3**: `Stream` Generates an Excel file using `ExcelJS` with a `WorkbookWriter` and streams it through a `PassThrough` stream (`highWaterMark: 16 * 1024`).
-- **/download-exceljs-4**: `Stream` Generates an Excel file using `ExcelJS` with a `WorkbookWriter` and streams it to response.
-- **/download-xlsx-1**: `Buffer` Generates an Excel file using `XLSX` with a `write` method.
+- **/download-exceljs-1**: `Buffer` Generates an Excel file using `exceljs` with a `workbook.xlsx.write`.
+- **/download-exceljs-2**: `Stream` Generates an Excel file using `exceljs` with a `workbookWriter` and streams it through a `PassThrough` stream (`highWaterMark: 1024`).
+- **/download-exceljs-3**: `Stream` Generates an Excel file using `exceljs` with a `workbookWriter` and streams it through a `PassThrough` stream (`highWaterMark: 16 * 1024`).
+- **/download-exceljs-4**: `Stream` Generates an Excel file using `exceljs` with a `workbookWriter` and streams it to response.
+- **/download-xlsx-1**: `Buffer` Generates an Excel file using `xlsx` with a `write` method.
+- **/prepare-exceljs-1**: `Stream` Prepares an Excel template using `exceljs`.
+- **/prepare-xlsx-template-1**: `Buffer` Prepares an Excel template using `xlsx-template`.
+- **/upload-exceljs-1**: Uploads an Excel file for processing using `exceljs`. The file should be uploaded as a form-data with the key file.
 
 ## Installation
 

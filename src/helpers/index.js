@@ -14,18 +14,18 @@ export const clearStat = (stat) => {
 };
 
 export const withLogging = (fn, name) => {
-  return async function (...args) {
+  return async function (req, res, next) {
     const token = crypto.randomUUID();
 
     const start = performance.now();
 
     this.logger.info(`${token}: ${name} start`);
     try {
-      await fn.apply(this, args);
+      await fn.apply(this, [req, res, next]);
     } catch (error) {
       this.logger.error(`${token}: ${error.message || "UNKNOWN_ERROR"}`);
 
-      throw error;
+      next(error);
     } finally {
       this.logger.info(`${token}: ${name} end with duration: ${performance.now() - start}ms`);
       this.clearStat(this.stat);

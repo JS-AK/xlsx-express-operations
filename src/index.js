@@ -22,6 +22,14 @@ app.get("/prepare-xlsx-template-1", Routes.PrepareXlsxTemplate1.exec.bind(data))
 app.get("/read-file-exceljs-1", Routes.ReadFileExcelJS1.exec.bind(data));
 app.post("/upload-exceljs-1", upload.single("file"), Routes.UploadExcelJS1.exec.bind(data));
 
+app.use((err, req, res, next) => {
+  res.setHeader("Content-Type", "text/plain; charset=UTF-8");
+  res.setHeader("Content-Disposition", "");
+
+  res.status(400);
+  res.send(err.message);
+});
+
 const port = 3000;
 
 app.listen(port, () => { logger.info(`Server is running on port ${port}`); });

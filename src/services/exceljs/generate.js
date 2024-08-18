@@ -45,12 +45,8 @@ export async function generate(writeStream, templateName = "template01.xlsx") {
     });
 
     worksheet.columns.forEach((column, index) => {
-      const col = worksheetResult.getColumn(index + 1);
-
-      col.width = column.width;
+      Object.assign(worksheetResult.getColumn(index + 1), column);
     });
-
-    if (worksheet.autoFilter) { worksheetResult.autoFilter = worksheet.autoFilter; }
 
     Object.keys(worksheet._merges).forEach((mergeKey) => {
       const mergeRange = worksheet._merges[mergeKey];
@@ -58,15 +54,23 @@ export async function generate(writeStream, templateName = "template01.xlsx") {
       worksheetResult.mergeCells(mergeRange);
     });
 
-    worksheet.eachRow((row, rowNumber) => {
-      const newRow = worksheetResult.getRow(rowNumber);
+    if (worksheet.autoFilter) { worksheetResult.autoFilter = worksheet.autoFilter; }
 
-      Object.assign(newRow, row);
+    worksheet.eachRow(
+      { includeEmpty: true },
+      (row, rowNumber) => {
+        const newRow = worksheetResult.getRow(rowNumber);
 
-      row.eachCell({ includeEmpty: true }, (cell, colNumber) => { Object.assign(newRow.getCell(colNumber), cell); });
+        Object.assign(newRow, row);
 
-      newRow.commit();
-    });
+        row.eachCell(
+          { includeEmpty: true },
+          (cell, colNumber) => { Object.assign(newRow.getCell(colNumber), cell); },
+        );
+
+        newRow.commit();
+      },
+    );
 
     worksheetResult.commit();
   });
